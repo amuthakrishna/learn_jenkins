@@ -1,22 +1,34 @@
 pipeline {
     agent any
+    parameters {
+        choice(name: 'VERSION', choice: ['1.0', '1.1'], description: '')
+        booleanParam(name: 'executeTest', defaultValue: true, description: '')
+    }
 
     stages {
-        stage("Show credentials") {
+        stage("Build") {
             steps {
-                echo "application is running"
-
-                withCredentials([
-                    usernamePassword(
-                        credentialsId: 'docker-hub-credentials',
-                        usernameVariable: 'USER',
-                        passwordVariable: 'PWD'
-                    )
-                ]) {
-                    sh 'echo "User is $USER"'
-                    // NEVER echo password in real pipelines
+                echo 'building application
+            }
+            
+        }
+        stage("Test") {
+            steps {
+                echo 'building application
+                when {
+                    expression {
+                        params.executeTest == true
+                    }
                 }
             }
+            
+        }
+        stage("deploy") {
+            steps {
+                echo 'building application
+                echo "deploy ${params.VERSION}"
+            }
+            
         }
     }
 }
