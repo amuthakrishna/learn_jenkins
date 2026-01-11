@@ -1,19 +1,22 @@
 pipeline {
-  agent any
-  environment {
-    
-  }
-  stages {
-    stage("Show credentails") {
-      steps {
-        echo "application is running"
-        withCredentials([
-        usernamePassword(credentails:'docker-hub-credentials', usernamevariable: USER, passwordvariable PWD)
-      ]) {
-          sh "some ${USER} ${PWD}"
-      }
+    agent any
+
+    stages {
+        stage("Show credentials") {
+            steps {
+                echo "application is running"
+
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'docker-hub-credentials',
+                        usernameVariable: 'USER',
+                        passwordVariable: 'PWD'
+                    )
+                ]) {
+                    sh 'echo "User is $USER"'
+                    // NEVER echo password in real pipelines
+                }
+            }
+        }
     }
-  }
-
 }
-
