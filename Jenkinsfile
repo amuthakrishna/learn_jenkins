@@ -1,9 +1,16 @@
 pipeline {
   agent any
+  environment {
+    
+  }
   stages {
-    stage("Build Dcoker image") {
+    stage("Show credentails") {
       steps {
         echo "application is running"
+        withCredentials([
+        usernamePassword(credentails:'docker-hub-credentials', usernamevariable: USER, passwordvariable PWD)
+      ]) {
+          sh "some ${USER} ${PWD}"
       }
     }
   }
