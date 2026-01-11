@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage("build") {
+    stage("Build Dcoker image") {
       steps {
         echo "application is running"
       }
