@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("build") {
            steps {
-               echo 'welcome to the login page'
+               sh 'docker build -t jenkins-test:v1 .'
            }
         }
     }
