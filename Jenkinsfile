@@ -15,7 +15,7 @@ pipeline {
            steps {
                script {
                    withDockerRegistry(credentialsId: 'docker-hub-credentials') {
-                        sh 'docker image push krishnamoorthy1/demo-app:v5 .'
+                        sh 'docker image push krishnamoorthy1/demo-app:v5'
                     }
                }
            }
