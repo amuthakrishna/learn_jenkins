@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("build") {
            steps {
-               sh 'welcome to the login page'
+               echo 'welcome to the login page'
            }
         }
     }
