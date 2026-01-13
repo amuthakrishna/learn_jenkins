@@ -17,7 +17,7 @@ pipeline {
     }
 
     stages {
-        stage("init") {
+        stage("Init") {
             steps {
                 script {
                     gv = load "script.groovy"
@@ -35,9 +35,7 @@ pipeline {
 
         stage("Test") {
             when {
-                expression {
-                    params.executeTest == true
-                }
+                expression { params.executeTest }
             }
             steps {
                 script {
