@@ -2,12 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Docker Build') {
+        stage('Git CheckOut') {
             steps {
-                sh '''
-                TAG=$(date +"%Y%m%d-%H%M%S")
-                docker build -t nginx:${TAG} .
-                '''
+                withCredentials([gitUsernamePassword(credentialsId: 'GIt-Credentials', gitToolName: 'Default')]) {
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh 'docker build -t krishnamoorthy-nginx:v1 .'
+                }
             }
         }
     }
