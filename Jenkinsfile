@@ -2,9 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Docker BUild') {
+        stage('Docker Build') {
             steps {
-                sh 'docker build -t nginx:v1 .'
+                
+                sh 'docker build -t nginx:${BUILD_NUMBER} .'
             }
         }
     }
