@@ -4,8 +4,10 @@ pipeline {
     stages {
         stage('Docker Build') {
             steps {
-                
-                sh 'docker build -t nginx:${BUILD_NUMBER} .'
+                sh '''
+                TAG=$(date +"%Y%m%d-%H%M%S")
+                docker build -t nginx:${TAG} .
+                '''
             }
         }
     }
