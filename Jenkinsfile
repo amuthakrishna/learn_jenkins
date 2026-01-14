@@ -1,25 +1,16 @@
 pipeline {
     agent any
     stages {
-        stage("Image Build") {
-           steps {
-               script {
-                   withDockerRegistry(credentialsId: 'docker-hub-credentials') {
-                        sh 'docker build -t krishnamoorthy1/demo-app:v5 .'
+        stage(Build and Push Docker Image {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials'), usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']) {
+                        sh 'docker build -t krishnamoorthy1/demo-app:v45 .'
+                        echo $PASSWORD | docker login -u $USERNAME -password-stdin
+                        sh 'docker push krishnamoorthy1/demo-app:v45'
                     }
-               }
-           }
-        }
-
-        stage("Image Push") {
-           steps {
-               script {
-                   withDockerRegistry(credentialsId: 'docker-hub-credentials') {
-                        sh 'docker image push krishnamoorthy1/demo-app:v5'
-                    }
-               }
-           }
+                }
+            }
         }
     }
-    
 }
