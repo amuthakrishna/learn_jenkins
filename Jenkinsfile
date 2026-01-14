@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage(Build and Push Docker Image {
+        stage(Build and Push Docker Image) {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials'), usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']) {
